@@ -1,7 +1,6 @@
 # Blurring image
 import numpy as np
 import cv2
-from matplotlib import pyplot as plt
 
 
 def blur(img, k=2):                # Loading the image
