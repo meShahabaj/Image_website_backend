@@ -5,6 +5,7 @@ import os
 import numpy as np
 import cv2
 from io import BytesIO
+from Blur import blur
 
 app = Flask(__name__)
 CORS(app)  # ✅ Allow all origins (good for dev; restrict later in prod)
@@ -17,6 +18,7 @@ def upload():
     file = request.files['image']
     width = int(round(float(request.form["width"])))
     height = int(round(float((request.form["height"]))))
+    blur_value = int(round(float(request.form["blur"])))
 
     if file.filename == '':
         return 'No selected file', 400
@@ -25,7 +27,12 @@ def upload():
     np_arr  = np.frombuffer(file_byte, np.uint8)
     image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
 
+    
+
     resized = cv2.resize(image, (width, height))
+
+    resized = blur(resized, k=blur_value)
+    
 
     success, buffer = cv2.imencode(".jpg", resized)
 
