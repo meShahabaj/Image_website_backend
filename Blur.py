@@ -2,7 +2,6 @@
 import numpy as np
 import cv2
 
-
 def blur(img, k=2):                # Loading the image
     pad = k // 2                                                    # padding size
     kernel = np.ones((k, k), dtype=np.float32) / (k * k)

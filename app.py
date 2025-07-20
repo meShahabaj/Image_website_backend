@@ -27,8 +27,6 @@ def upload():
     np_arr  = np.frombuffer(file_byte, np.uint8)
     image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
 
-    
-
     resized = cv2.resize(image, (width, height))
 
     resized = blur(resized, k=blur_value)
